@@ -1,0 +1,38 @@
+name: Chatbot Model Runner
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false # For now, just build, not push to a registry
+        tags: chatbot-runner:latest
+
+    - name: Run chatbot model runner
+      run: |
+        echo "Running the chatbot container..."
+        # The following command is a placeholder for running the actual bot.
+        # It will mount the markdown files as volumes so the bot can access them.
+        # We will create the Dockerfile and the bot script in the next step.
+        # docker run --rm \
+        #   -v ${{ github.workspace }}/agent.md:/app/agent.md \
+        #   -v ${{ github.workspace }}/instructions.md:/app/instructions.md \
+        #   -v ${{ github.workspace }}/structure.md:/app/structure.md \
+        #   chatbot-runner:latest
+        echo "Workflow complete."
