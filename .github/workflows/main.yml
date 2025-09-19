@@ -21,6 +21,7 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
+        load: true # Load the image into the local Docker daemon
         push: false # For now, just build, not push to a registry
         tags: chatbot-runner:latest
 
