@@ -27,12 +27,9 @@ jobs:
     - name: Run chatbot model runner
       run: |
         echo "Running the chatbot container..."
-        # The following command is a placeholder for running the actual bot.
-        # It will mount the markdown files as volumes so the bot can access them.
-        # We will create the Dockerfile and the bot script in the next step.
-        # docker run --rm \
-        #   -v ${{ github.workspace }}/agent.md:/app/agent.md \
-        #   -v ${{ github.workspace }}/instructions.md:/app/instructions.md \
-        #   -v ${{ github.workspace }}/structure.md:/app/structure.md \
-        #   chatbot-runner:latest
+        docker run --rm \
+          -v ${{ github.workspace }}/agent.md:/app/agent.md \
+          -v ${{ github.workspace }}/instructions.md:/app/instructions.md \
+          -v ${{ github.workspace }}/structure.md:/app/structure.md \
+          chatbot-runner:latest
         echo "Workflow complete."
